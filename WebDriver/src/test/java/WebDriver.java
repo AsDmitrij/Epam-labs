@@ -7,13 +7,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.SoftAssert;
+
+import java.util.regex.*;
 
 import java.util.List;
 
 public class WebDriver {
 
-    public org.openqa.selenium.WebDriver driver  = new ChromeDriver();
-    @Before
+    private org.openqa.selenium.WebDriver driver;
+    @Before //Method(alwaysRun=true)
     public void setBrowserOptions()
     {
         ChromeOptions options = new ChromeOptions();
@@ -27,21 +30,36 @@ public class WebDriver {
         driver.get("https://ali.onl/1JrL");
         List<WebElement> selectProduct = driver.findElements(By.xpath("//img[@title='V3 Nodemcu-CH340']"));
         selectProduct.get(0).click();
-        String priceOfAddedProduct = driver.findElements(By.xpath("//div[@class='product-price-current']/span[@class='product-price-value' and 1]")).get(0).getText();
-        List<WebElement> addToCartBtn = driver.findElements(By.xpath("//button[@class='next-btn next-large next-btn-primary addcart']"));
-        addToCartBtn.get(0).click();
+        String priceOfAddedProductInString  = driver.findElements(By.xpath("//div[@class='product-price-current']/span[@class='product-price-value' and 1]")).get(0).getText();
+        double priceOfAddedProduct = convertPriceToDouble(priceOfAddedProductInString);
+        String priceOfDeliveringProductInString = driver.findElements(By.xpath("//div[@class='product-shipping-price']")).get(0).getText();
+        double priceOfDeliveringProduct = convertPriceToDouble(priceOfDeliveringProductInString);
+        List<WebElement> addToCart = driver.findElements(By.xpath("//button[@class='next-btn next-large next-btn-primary addcart']"));
+        addToCart.get(0).click();
         new WebDriverWait(driver,5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']")));
         List<WebElement> viewCart = driver.findElements(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']"));
         viewCart.get(0).click();
         new WebDriverWait(driver,10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='product-name-link']")));
-        String priceOfAddedProductInCart = driver.findElement(By.xpath("//span[@class='main-cost-price']")).getText();
-        Assert.assertEquals(priceOfAddedProduct,priceOfAddedProductInCart);
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='next-checkbox-label']")));
+        List<WebElement> selectProductForBuy = driver.findElements(By.xpath("//span[@class='next-checkbox-label']"));
+        selectProductForBuy.get(0).click();
+        String cartPriceInSting = driver.findElement(By.xpath("//div[@class='total-price']/dl[1]/dd[1]")).getText();
+        new WebDriverWait(driver,5)
+                .until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[@class='total-price']/dl[1]/dd[1]"),cartPriceInSting)));
+        cartPriceInSting = driver.findElement(By.xpath("//div[1]/dl[@class='charges-totle ' and 1]/dd[1]")).getText();
+        String deliveryPriceInSting = driver.findElement(By.xpath("//div[2]/dl[@class='charges-totle ' and 1]/dd[1]")).getText();
+        double cartProductPrice = convertPriceToDouble(cartPriceInSting);
+        double cartDeliveryPrice = convertPriceToDouble(deliveryPriceInSting);
+        SoftAssert softAssert=new SoftAssert();
+        softAssert.assertEquals(priceOfAddedProduct, cartProductPrice);
+        softAssert.assertEquals(priceOfDeliveringProduct, cartDeliveryPrice);
+        softAssert.assertAll();
     }
-    @After
+    @After  //Method(alwaysRun=true)
     public void closeBrowser(){
         driver.quit();
+        driver = null;
     }
     void AddCookies()
     {
@@ -75,6 +93,19 @@ public class WebDriver {
         driver.manage().addCookie(cookie_xman_t);
         driver.manage().addCookie(cookie_xman_us_f);
     }
-
+    double convertPriceToDouble(String price)
+    {
+        Pattern pattern=Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
+        Matcher matcher = pattern.matcher(price);
+        int start = 0;
+        double result =0;
+        while (matcher.find(start)) {
+            String value = price.substring(matcher.start(), matcher.end());
+            value =value.replace(',', '.');
+            result = Double.parseDouble(value);
+            start = matcher.end();
+        }
+        return result;
+    }
 
 }
