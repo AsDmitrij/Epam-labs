@@ -16,7 +16,7 @@ public class TestPageObjectWebDriver {
     public void setBrowserOptions()
     {
 
-        System.setProperty("webdriver.chrome.driver", "D:/webdriver/chromedriver.exe" );
+        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");//D:/webdriver/chromedriver.exe" );
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         driver  = new ChromeDriver(options);
