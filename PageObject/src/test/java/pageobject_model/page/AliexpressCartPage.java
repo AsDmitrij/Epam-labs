@@ -32,7 +32,7 @@ public class AliexpressCartPage {
     }
 
     public void selectPurchasedItem(){
-        new WebDriverWait(driver,5)
+        new WebDriverWait(driver,15)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='next-checkbox-label']")));
         selectPurchasedItem.click();
         startTotalPriceInCart = productPriceInCart.getText();
@@ -44,7 +44,7 @@ public class AliexpressCartPage {
     }
     public double getDeliveringPriceOfProductInCart(){
         startTotalPriceInCart = productPriceInCart.getText();
-        new WebDriverWait(driver,5)
+        new WebDriverWait(driver,15)
                .until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[2]/dl[@class='charges-totle ' and 1]/dd[1]"),startTotalPriceInCart)));
         String deliveringPriceOfProductInCartInString =priceOfDeliveringProductInCart.getText();
         double deliveringPriceOfProductInCart = convertPriceToDouble(deliveringPriceOfProductInCartInString);

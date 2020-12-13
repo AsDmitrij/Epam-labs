@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="WebDriver" />
         <module name="testWebdriver" />
+        <module name="PageObject" />
       </profile>
     </annotationProcessing>
   </component>
