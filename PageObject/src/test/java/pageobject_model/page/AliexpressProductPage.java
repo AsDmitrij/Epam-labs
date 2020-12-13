@@ -59,9 +59,9 @@ public class AliexpressProductPage {
 
     public AliexpressCartPage goToCart(){
         addToCart.click();
-        Thread.sleep(5000);
-        //new WebDriverWait(driver,5)
-              //  .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']")));
+        //Thread.sleep(5000);
+        new WebDriverWait(driver,10)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']")));
         viewCart.click();
         return new AliexpressCartPage(driver);
     }
