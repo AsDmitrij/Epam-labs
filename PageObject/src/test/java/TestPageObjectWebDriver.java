@@ -12,11 +12,16 @@ import pageobject_model.page.AliexpressProductPage;
 public class TestPageObjectWebDriver {
 
     private WebDriver driver;
+    private static String OS = System.getProperty("os.name").toLowerCase();
     @Before
     public void setBrowserOptions()
     {
-
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");//D:/webdriver/chromedriver.exe" );
+       if(isWindows()){
+           System.setProperty("webdriver.chrome.driver","D:/webdriver/chromedriver.exe" );
+       }
+        else if(isMac()){
+            System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+       }
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         driver  = new ChromeDriver(options);
@@ -42,5 +47,15 @@ public class TestPageObjectWebDriver {
         driver.quit();
         driver = null;
     }
+    public static boolean isWindows() {
 
+        return (OS.indexOf("win") >= 0);
+
+    }
+
+    public static boolean isMac() {
+
+        return (OS.indexOf("mac") >= 0);
+
+    }
 }
