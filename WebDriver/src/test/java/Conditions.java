@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 
 public class Conditions {
     protected WebDriver driver;
-    protected static final String USER_MAIL="simplecloudforonetime@yandex.by";
-    protected static final String USER_PASSWORD="testPassword";
     private static String OS = System.getProperty("os.name").toLowerCase();
     public static boolean isWindows() {
         return (OS.indexOf("win") >= 0);

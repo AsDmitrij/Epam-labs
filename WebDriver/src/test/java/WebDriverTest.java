@@ -13,7 +13,7 @@ import java.util.List;
 
 public class WebDriverTest {
 
-    private org.openqa.selenium.WebDriver driver;
+    private WebDriver driver;
     private static String OS = System.getProperty("os.name").toLowerCase();
     @BeforeTest(alwaysRun=true)
     public void setBrowserOptions()
@@ -26,6 +26,7 @@ public class WebDriverTest {
         }
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
+        options.addArguments("--disable-gpu");
         driver  = new ChromeDriver(options);
     }
     @Test
@@ -33,21 +34,26 @@ public class WebDriverTest {
         driver.get("https://ali.onl/1JrL");
         Conditions.AddCookies(driver);
         driver.get("https://ali.onl/1JrL");
-        List<WebElement> selectProduct = driver.findElements(By.xpath("//li[1]/div[@class='sku-property-image' and 1]/img[1]"));
-        selectProduct.get(0).click();
-        String priceOfAddedProductInString  = driver.findElements(By.xpath("//div[@class='product-price-current']/span[@class='product-price-value' and 1]")).get(0).getText();
+
+        WebElement selectProduct = driver.findElement(By.xpath("//li[1]/div[@class='sku-property-image' and 1]"));
+        selectProduct.click();
+
+        String priceOfAddedProductInString  = driver.findElement(By.xpath("//div[@class='product-price-current']/span[@class='product-price-value' and 1]")).getText();
         double priceOfAddedProduct = Conditions.convertPriceToDouble(priceOfAddedProductInString);
-        String priceOfDeliveringProductInString = driver.findElements(By.xpath("//div[@class='product-shipping-price']")).get(0).getText();
+        String priceOfDeliveringProductInString = driver.findElement(By.xpath("//div[@class='product-shipping-price']")).getText();
         double priceOfDeliveringProduct = Conditions.convertPriceToDouble(priceOfDeliveringProductInString);
 
-        List<WebElement> addToCart = driver.findElements(By.xpath("//button[@class='next-btn next-large next-btn-primary addcart']"));
-        addToCart.get(0).click();
+        WebElement addToCart = driver.findElement(By.xpath("//button[@class='next-btn next-large next-btn-primary addcart']"));
+        new WebDriverWait(driver,5)
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='next-btn next-large next-btn-primary addcart']")));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", addToCart);
 
-        new WebDriverWait(driver,10)
+        new WebDriverWait(driver,2)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']")));
         List<WebElement> viewCart = driver.findElements(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']"));
         viewCart.get(0).click();
-        new WebDriverWait(driver,10)
+        new WebDriverWait(driver,2)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='next-checkbox-label']")));
         List<WebElement> selectProductForBuy = driver.findElements(By.xpath("//span[@class='next-checkbox-label']"));
         selectProductForBuy.get(0).click();
