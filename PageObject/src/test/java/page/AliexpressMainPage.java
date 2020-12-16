@@ -25,8 +25,6 @@ public class AliexpressMainPage {
     @FindBy(xpath = "//input[@class='search-button']")
     private WebElement searchButton;
 
-//li[1]/div[@class='list product-card' and 1]/div[@class='product-info' and 2]/div[@class='left-zone' and 1]/div[@class='item-title-wrap' and 1]/a[@class='item-title' and 1]
-
     public AliexpressMainPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Surefire suite" duration-ms="37592" started-at="2020-12-16T12:07:50 MSK" finished-at="2020-12-16T12:08:27 MSK">
+  <suite started-at="2020-12-16T15:24:13 MSK" name="Surefire suite" finished-at="2020-12-16T15:24:46 MSK" duration-ms="32304">
     <groups>
     </groups>
-    <test name="Surefire test" duration-ms="37592" started-at="2020-12-16T12:07:50 MSK" finished-at="2020-12-16T12:08:27 MSK">
+    <test started-at="2020-12-16T15:24:13 MSK" name="Surefire test" finished-at="2020-12-16T15:24:46 MSK" duration-ms="32304">
       <class name="test.TestPageObjectWebDriver">
-        <test-method status="PASS" signature="setBrowserOptions()[pri:0, instance:test.TestPageObjectWebDriver@6500df86]" name="setBrowserOptions" is-config="true" duration-ms="3375" started-at="2020-12-16T12:07:50 MSK" finished-at="2020-12-16T12:07:53 MSK">
+        <test-method is-config="true" signature="setBrowserOptions()[pri:0, instance:test.TestPageObjectWebDriver@7e07db1f]" started-at="2020-12-16T15:24:13 MSK" name="setBrowserOptions" finished-at="2020-12-16T15:24:16 MSK" duration-ms="2707" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setBrowserOptions -->
-        <test-method status="PASS" signature="TestPriceOfProductAndDeliveringInCart()[pri:0, instance:test.TestPageObjectWebDriver@6500df86]" name="TestPriceOfProductAndDeliveringInCart" duration-ms="15564" started-at="2020-12-16T12:07:56 MSK" finished-at="2020-12-16T12:08:12 MSK">
+        <test-method signature="TestPriceOfProductAndDeliveringInCart()[pri:0, instance:test.TestPageObjectWebDriver@7e07db1f]" started-at="2020-12-16T15:24:18 MSK" name="TestPriceOfProductAndDeliveringInCart" finished-at="2020-12-16T15:24:34 MSK" duration-ms="15237" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TestPriceOfProductAndDeliveringInCart -->
-        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:test.TestPageObjectWebDriver@6500df86]" name="closeBrowser" is-config="true" duration-ms="775" started-at="2020-12-16T12:08:26 MSK" finished-at="2020-12-16T12:08:27 MSK">
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:test.TestPageObjectWebDriver@7e07db1f]" started-at="2020-12-16T15:24:44 MSK" name="closeBrowser" finished-at="2020-12-16T15:24:45 MSK" duration-ms="639" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
       </class> <!-- test.TestPageObjectWebDriver -->
       <class name="test.UserAccessTest">
-        <test-method status="PASS" signature="setBrowserOptions()[pri:0, instance:test.UserAccessTest@402a079c]" name="setBrowserOptions" is-config="true" duration-ms="2685" started-at="2020-12-16T12:07:53 MSK" finished-at="2020-12-16T12:07:56 MSK">
+        <test-method is-config="true" signature="setBrowserOptions()[pri:0, instance:test.UserAccessTest@1189dd52]" started-at="2020-12-16T15:24:16 MSK" name="setBrowserOptions" finished-at="2020-12-16T15:24:18 MSK" duration-ms="2298" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setBrowserOptions -->
-        <test-method status="PASS" signature="userCanLoginTest()[pri:0, instance:test.UserAccessTest@402a079c]" name="userCanLoginTest" duration-ms="14242" started-at="2020-12-16T12:08:12 MSK" finished-at="2020-12-16T12:08:26 MSK">
+        <test-method signature="userCanLoginTest()[pri:0, instance:test.UserAccessTest@1189dd52]" started-at="2020-12-16T15:24:34 MSK" name="userCanLoginTest" finished-at="2020-12-16T15:24:44 MSK" duration-ms="10620" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- userCanLoginTest -->
-        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:test.UserAccessTest@402a079c]" name="closeBrowser" is-config="true" duration-ms="886" started-at="2020-12-16T12:08:27 MSK" finished-at="2020-12-16T12:08:27 MSK">
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:test.UserAccessTest@1189dd52]" started-at="2020-12-16T15:24:45 MSK" name="closeBrowser" finished-at="2020-12-16T15:24:46 MSK" duration-ms="764" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
