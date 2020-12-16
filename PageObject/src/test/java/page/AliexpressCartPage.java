@@ -27,6 +27,9 @@ public class AliexpressCartPage {
     @FindBy(xpath = "//div[2]/dl[@class='charges-totle ' and 1]/dd[1]")
     private WebElement priceOfDeliveringProductInCart;
 
+    private static By selectedItemCheckBox = By.xpath("//span[@class='next-checkbox-label']");
+    private static By totalSelectedItemPrice = By.xpath("//div[2]/dl[@class='charges-totle ' and 1]/dd[1]");
+
     public AliexpressCartPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -34,7 +37,7 @@ public class AliexpressCartPage {
 
     public void selectPurchasedItem(){
         new WebDriverWait(driver,15)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='next-checkbox-label']")));
+                .until(ExpectedConditions.presenceOfElementLocated(selectedItemCheckBox));
         selectPurchasedItem.click();
         startTotalPriceInCart = productPriceInCart.getText();
     }
@@ -46,7 +49,7 @@ public class AliexpressCartPage {
     public double getDeliveringPriceOfProductInCart(){
         startTotalPriceInCart = productPriceInCart.getText();
         new WebDriverWait(driver,15)
-               .until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//div[2]/dl[@class='charges-totle ' and 1]/dd[1]"),startTotalPriceInCart)));
+               .until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElementLocated(totalSelectedItemPrice, startTotalPriceInCart)));
         String deliveringPriceOfProductInCartInString =priceOfDeliveringProductInCart.getText();
         double deliveringPriceOfProductInCart = CommonConditions.convertPriceToDouble(deliveringPriceOfProductInCartInString);
         return deliveringPriceOfProductInCart;

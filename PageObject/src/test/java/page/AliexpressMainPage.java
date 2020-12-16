@@ -25,6 +25,8 @@ public class AliexpressMainPage {
     @FindBy(xpath = "//input[@class='search-button']")
     private WebElement searchButton;
 
+    private static By viewWelcomeName = By.xpath("//b[@class='welcome-name']");
+
     public AliexpressMainPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -41,7 +43,7 @@ public class AliexpressMainPage {
         action.moveToElement(hiddenButton);
         action.perform();
         new WebDriverWait(driver,5)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//b[@class='welcome-name']")));
+                .until(ExpectedConditions.presenceOfElementLocated(viewWelcomeName));
         String userWelcomeName = userNameField.getText();
         return userWelcomeName;
     }

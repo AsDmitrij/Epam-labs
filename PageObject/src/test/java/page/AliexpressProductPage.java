@@ -7,9 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import test.CommonConditions;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class AliexpressProductPage {
 
     private static final String PRODUCT_PAGE_URL = "https://ali.onl/1JrL";
@@ -30,7 +27,8 @@ public class AliexpressProductPage {
 
     @FindBy(xpath = "//button[@class='next-btn next-small next-btn-primary view-shopcart']")
     private WebElement viewCart;
-    private By viewCartLocator = By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']");
+
+    private static By viewCartLocator = By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']");
 
     public AliexpressProductPage(WebDriver driver){
         this.driver = driver;
@@ -63,7 +61,7 @@ public class AliexpressProductPage {
         executor.executeScript("arguments[0].click();", addToCart);
         addToCart.click();
         new WebDriverWait(driver,15)
-                .until(ExpectedConditions.presenceOfElementLocated((ViewCartLocator));
+                .until(ExpectedConditions.presenceOfElementLocated((viewCartLocator)));
         viewCart.click();
         return new AliexpressCartPage(driver);
     }
