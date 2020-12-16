@@ -28,6 +28,7 @@ public class TestPageObjectWebDriver {
         }
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
+        options.addArguments("--disable-gpu");
         driver  = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
