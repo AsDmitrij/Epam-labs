@@ -30,6 +30,7 @@ public class AliexpressProductPage {
 
     @FindBy(xpath = "//button[@class='next-btn next-small next-btn-primary view-shopcart']")
     private WebElement viewCart;
+    private By viewCartLocator = By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']");
 
     public AliexpressProductPage(WebDriver driver){
         this.driver = driver;
@@ -62,7 +63,7 @@ public class AliexpressProductPage {
         executor.executeScript("arguments[0].click();", addToCart);
         addToCart.click();
         new WebDriverWait(driver,15)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']")));
+                .until(ExpectedConditions.presenceOfElementLocated((ViewCartLocator));
         viewCart.click();
         return new AliexpressCartPage(driver);
     }

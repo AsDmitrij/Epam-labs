@@ -3,13 +3,6 @@
 <suite thread-count="1" name="Failed suite [Surefire suite]" verbose="0">
   <test thread-count="1" name="Surefire test(failed)" verbose="0">
     <classes>
-      <class name="test.UserAccessTest">
-        <methods>
-          <include name="setBrowserOptions"/>
-          <include name="closeBrowser"/>
-          <include name="userCanLoginTest"/>
-        </methods>
-      </class> <!-- test.UserAccessTest -->
       <class name="test.TestPageObjectWebDriver">
         <methods>
           <include name="closeBrowser"/>

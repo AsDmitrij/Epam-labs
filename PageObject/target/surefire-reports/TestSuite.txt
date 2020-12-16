@@ -1,62 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 2, Errors: 0, Skipped: 2, Time elapsed: 605.829 s <<< FAILURE! - in TestSuite
-setBrowserOptions(test.UserAccessTest)  Time elapsed: 605.053 s  <<< FAILURE!
-org.openqa.selenium.SessionNotCreatedException: 
-session not created
-from timeout: Timed out receiving message from renderer: 600.000
-  (Session info: chrome=87.0.4280.88)
-Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
-System info: host: 'MSI', ip: '192.168.137.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.8'
-Driver info: driver.version: ChromeDriver
-remote stacktrace: Backtrace:
-	Ordinal0 [0x007FC0C3+3326147]
-	Ordinal0 [0x006E0851+2164817]
-	Ordinal0 [0x00567298+619160]
-	Ordinal0 [0x0055B17F+569727]
-	Ordinal0 [0x0055A421+566305]
-	Ordinal0 [0x0055A815+567317]
-	Ordinal0 [0x0055A135+565557]
-	Ordinal0 [0x0055FEF0+589552]
-	Ordinal0 [0x0055A0F1+565489]
-	Ordinal0 [0x0055AEA2+568994]
-	Ordinal0 [0x0055A421+566305]
-	Ordinal0 [0x0055A815+567317]
-	Ordinal0 [0x0055A135+565557]
-	Ordinal0 [0x0055F075+585845]
-	Ordinal0 [0x0055A0F1+565489]
-	Ordinal0 [0x0055AEA2+568994]
-	Ordinal0 [0x0055A421+566305]
-	Ordinal0 [0x0055A815+567317]
-	Ordinal0 [0x0055A135+565557]
-	Ordinal0 [0x00556776+550774]
-	Ordinal0 [0x0055A0F1+565489]
-	Ordinal0 [0x00559F13+565011]
-	Ordinal0 [0x00559D07+564487]
-	Ordinal0 [0x005682C0+623296]
-	Ordinal0 [0x00506BDD+224221]
-	Ordinal0 [0x00505CAC+220332]
-	Ordinal0 [0x0050189B+202907]
-	Ordinal0 [0x004E3DF4+81396]
-	Ordinal0 [0x004E4DEE+85486]
-	Ordinal0 [0x004E4D79+85369]
-	Ordinal0 [0x006F85DC+2262492]
-	GetHandleVerifier [0x00982874+1487204]
-	GetHandleVerifier [0x009823CD+1486013]
-	GetHandleVerifier [0x0098A368+1518680]
-	GetHandleVerifier [0x00982F4E+1488958]
-	Ordinal0 [0x006EED0D+2223373]
-	Ordinal0 [0x006FA12B+2269483]
-	Ordinal0 [0x006FA26F+2269807]
-	Ordinal0 [0x0070ECB8+2354360]
-	BaseThreadInitThunk [0x77C2FA29+25]
-	RtlGetAppContainerNamedObjectPath [0x77E375F4+228]
-	RtlGetAppContainerNamedObjectPath [0x77E375C4+180]
-
-	at test.UserAccessTest.setBrowserOptions(UserAccessTest.java:33)
-
-closeBrowser(test.UserAccessTest)  Time elapsed: 0.59 s  <<< FAILURE!
-java.lang.NullPointerException
-	at test.UserAccessTest.closeBrowser(UserAccessTest.java:49)
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 37.013 s <<< FAILURE! - in TestSuite
+TestPriceOfProductAndDeliveringInCart(test.TestPageObjectWebDriver)  Time elapsed: 16.947 s  <<< FAILURE!
+java.lang.AssertionError: 
+The following asserts failed:
+	expected [53.74] but found [11.36]
+	at test.TestPageObjectWebDriver.TestPriceOfProductAndDeliveringInCart(TestPageObjectWebDriver.java:48)
 
