@@ -3,12 +3,12 @@ package test;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import page.AliexpressLoginPage;
+import org.testng.annotations.Test;
 
 import java.util.Set;
 
@@ -40,7 +40,6 @@ public class UserAccessTest {
                 .goToMainPage()
                 .getUserWelcomeName();
         Set<Cookie> allcookies = driver.manage().getCookies();
-        Thread.sleep(20000);
         Assert.assertEquals(USER_NAME,userWelcomeName);
     }
     @After

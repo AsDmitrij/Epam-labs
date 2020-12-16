@@ -3,13 +3,13 @@ package test;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.asserts.SoftAssert;
 import page.AliexpressProductPage;
+import org.testng.annotations.Test;
 
 public class TestPageObjectWebDriver {
 
@@ -29,6 +29,7 @@ public class TestPageObjectWebDriver {
         driver  = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
+
     @Test
     public void TestPriceOfProductAndDeliveringInCart() {
 
@@ -44,10 +45,7 @@ public class TestPageObjectWebDriver {
         softAssert.assertEquals(priceOfDeliveringProduct, cartDeliveryPrice);
         softAssert.assertAll();
     }
-    @Test
-    public void SearchGoodsTest(){
 
-    }
     @After
     public void closeBrowser(){
         driver.quit();
