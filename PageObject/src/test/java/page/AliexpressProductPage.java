@@ -56,6 +56,8 @@ public class AliexpressProductPage {
     }
 
     public AliexpressCartPage goToCart(){
+        new WebDriverWait(driver,5)
+                .until(ExpectedConditions.elementToBeClickable(addToCart));
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", addToCart);
         addToCart.click();
