@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Surefire suite" duration-ms="25624" started-at="2020-12-13T11:17:04 MSK" finished-at="2020-12-13T11:17:29 MSK">
+  <suite name="Surefire suite" duration-ms="37592" started-at="2020-12-16T12:07:50 MSK" finished-at="2020-12-16T12:08:27 MSK">
     <groups>
     </groups>
-    <test name="Surefire test" duration-ms="25624" started-at="2020-12-13T11:17:04 MSK" finished-at="2020-12-13T11:17:29 MSK">
-      <class name="TestPageObjectWebDriver">
-        <test-method status="PASS" signature="TestPriceOfProductAndDeliveringInCart()" name="TestPriceOfProductAndDeliveringInCart" duration-ms="25583" started-at="2020-12-13T11:17:04 MSK" finished-at="2020-12-13T11:17:29 MSK">
+    <test name="Surefire test" duration-ms="37592" started-at="2020-12-16T12:07:50 MSK" finished-at="2020-12-16T12:08:27 MSK">
+      <class name="test.TestPageObjectWebDriver">
+        <test-method status="PASS" signature="setBrowserOptions()[pri:0, instance:test.TestPageObjectWebDriver@6500df86]" name="setBrowserOptions" is-config="true" duration-ms="3375" started-at="2020-12-16T12:07:50 MSK" finished-at="2020-12-16T12:07:53 MSK">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setBrowserOptions -->
+        <test-method status="PASS" signature="TestPriceOfProductAndDeliveringInCart()[pri:0, instance:test.TestPageObjectWebDriver@6500df86]" name="TestPriceOfProductAndDeliveringInCart" duration-ms="15564" started-at="2020-12-16T12:07:56 MSK" finished-at="2020-12-16T12:08:12 MSK">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TestPriceOfProductAndDeliveringInCart -->
-      </class> <!-- TestPageObjectWebDriver -->
+        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:test.TestPageObjectWebDriver@6500df86]" name="closeBrowser" is-config="true" duration-ms="775" started-at="2020-12-16T12:08:26 MSK" finished-at="2020-12-16T12:08:27 MSK">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- test.TestPageObjectWebDriver -->
+      <class name="test.UserAccessTest">
+        <test-method status="PASS" signature="setBrowserOptions()[pri:0, instance:test.UserAccessTest@402a079c]" name="setBrowserOptions" is-config="true" duration-ms="2685" started-at="2020-12-16T12:07:53 MSK" finished-at="2020-12-16T12:07:56 MSK">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setBrowserOptions -->
+        <test-method status="PASS" signature="userCanLoginTest()[pri:0, instance:test.UserAccessTest@402a079c]" name="userCanLoginTest" duration-ms="14242" started-at="2020-12-16T12:08:12 MSK" finished-at="2020-12-16T12:08:26 MSK">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userCanLoginTest -->
+        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:test.UserAccessTest@402a079c]" name="closeBrowser" is-config="true" duration-ms="886" started-at="2020-12-16T12:08:27 MSK" finished-at="2020-12-16T12:08:27 MSK">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- test.UserAccessTest -->
     </test> <!-- Surefire test -->
   </suite> <!-- Surefire suite -->
 </testng-results>

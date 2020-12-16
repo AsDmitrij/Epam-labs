@@ -7,6 +7,8 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import page.AliexpressLoginPage;
 import org.testng.annotations.Test;
 
@@ -17,7 +19,7 @@ public class UserAccessTest {
     protected static final String USER_PASSWORD="testPassword";
     protected static final String USER_NAME="simplecloudforonetime";
     private WebDriver driver;
-    @Before
+    @BeforeTest (alwaysRun = true)
     public void setBrowserOptions()
     {
         if(CommonConditions.isWindows()){
@@ -42,7 +44,7 @@ public class UserAccessTest {
         Set<Cookie> allcookies = driver.manage().getCookies();
         Assert.assertEquals(USER_NAME,userWelcomeName);
     }
-    @After
+    @AfterTest (alwaysRun = true)
     public void closeBrowser(){
         driver.quit();
         driver = null;
