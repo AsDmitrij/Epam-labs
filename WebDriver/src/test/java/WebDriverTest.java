@@ -1,6 +1,7 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
@@ -32,15 +33,17 @@ public class WebDriverTest {
         driver.get("https://ali.onl/1JrL");
         Conditions.AddCookies(driver);
         driver.get("https://ali.onl/1JrL");
-        List<WebElement> selectProduct = driver.findElements(By.xpath("//img[@title='V3 Nodemcu-CH340']"));
+        List<WebElement> selectProduct = driver.findElements(By.xpath("//li[1]/div[@class='sku-property-image' and 1]/img[1]"));
         selectProduct.get(0).click();
         String priceOfAddedProductInString  = driver.findElements(By.xpath("//div[@class='product-price-current']/span[@class='product-price-value' and 1]")).get(0).getText();
         double priceOfAddedProduct = Conditions.convertPriceToDouble(priceOfAddedProductInString);
         String priceOfDeliveringProductInString = driver.findElements(By.xpath("//div[@class='product-shipping-price']")).get(0).getText();
         double priceOfDeliveringProduct = Conditions.convertPriceToDouble(priceOfDeliveringProductInString);
+
         List<WebElement> addToCart = driver.findElements(By.xpath("//button[@class='next-btn next-large next-btn-primary addcart']"));
         addToCart.get(0).click();
-        new WebDriverWait(driver,5)
+
+        new WebDriverWait(driver,10)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']")));
         List<WebElement> viewCart = driver.findElements(By.xpath("//button[@class='next-btn next-small next-btn-primary view-shopcart']"));
         viewCart.get(0).click();

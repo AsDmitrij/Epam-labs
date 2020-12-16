@@ -1,10 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: WebDriverTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 19.971 s <<< FAILURE! - in WebDriverTest
-TestAddProductToCart(WebDriverTest)  Time elapsed: 15.867 s  <<< FAILURE!
-java.lang.AssertionError: 
-The following asserts failed:
-	expected [53.74] but found [53.75]
-	at WebDriverTest.TestAddProductToCart(WebDriverTest.java:61)
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 13.4 s <<< FAILURE! - in WebDriverTest
+TestAddProductToCart(WebDriverTest)  Time elapsed: 10.176 s  <<< FAILURE!
+org.openqa.selenium.ElementClickInterceptedException: 
+element click intercepted: Element <button title="" type="button" class="next-btn next-large next-btn-primary addcart" role="button">...</button> is not clickable at point (765, 577). Other element would receive the click: <div>...</div>
+  (Session info: chrome=87.0.4280.88)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'MSI', ip: '192.168.0.102', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 87.0.4280.88, chrome: {chromedriverVersion: 87.0.4280.88 (89e2380a3e36c..., userDataDir: C:\WINDOWS\TEMP\scoped_dir2...}, goog:chromeOptions: {debuggerAddress: localhost:30798}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 34e4af7b6fdc19d0ff58ce1e84b76af0
+	at WebDriverTest.TestAddProductToCart(WebDriverTest.java:44)
 
