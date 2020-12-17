@@ -34,7 +34,7 @@ public class TestPageObjectWebDriver {
     }
 
     @Test
-    public void TestPriceOfProductAndDeliveringInCart() {
+    public void testPriceOfProductAndDeliveringInCart() {
 
         AliexpressProductPage aliexpressProductPage = new AliexpressProductPage(driver).openPage();
         double costOfAddedProduct = aliexpressProductPage.getPriceOfProduct();
