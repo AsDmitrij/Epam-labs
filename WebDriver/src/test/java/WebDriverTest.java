@@ -30,7 +30,7 @@ public class WebDriverTest {
         driver  = new ChromeDriver(options);
     }
     @Test
-    public void TestAddProductToCart() {
+    public void testAddProductToCart() {
         driver.get("https://ali.onl/1JrL");
         Conditions.AddCookies(driver);
         driver.get("https://ali.onl/1JrL");

@@ -18,7 +18,7 @@ public class CommonConditions {
     public static boolean isMac() {
         return (OS.indexOf("mac") >= 0);
     }
-    public static void AddCookies(WebDriver driver)
+    public static void addCookies(WebDriver driver)
     {
         Cookie cookie_bl_uid = new Cookie.Builder("_bl_uid", "zqk1eh8ewp7aL7uFmtjF4n7ewhF7").build();
         Cookie cookie_ga = new Cookie.Builder("_ga", "GA1.2.505662652.1606241702").build();
