@@ -16,16 +16,17 @@ import java.util.List;
 public class SearchTests  extends CommonConditions{
     @Test
     public void testSearch(){
-        String findProduct = "Samsung";
-        List<WebElement> searchResults = new MainPage(driver).openPage().search(findProduct).getListOfFindProducts();
-        assertThat(searchResults).extracting(WebElement::getText).allMatch(text -> text.contains(findProduct));
+        List<WebElement> searchResults = new MainPage(driver)
+                .openPage()
+                .search(NAME_OF_FIND_PRODUCT)
+                .getListOfFindProducts();
+        assertThat(searchResults).extracting(WebElement::getText).allMatch(text -> text.contains(NAME_OF_FIND_PRODUCT));
     }
     @Test
     public void testSortingSearch(){
-        String findProduct = "Samsung";
         SearchPage searchResults = new MainPage(driver)
                 .openPage()
-                .search(findProduct)
+                .search(NAME_OF_FIND_PRODUCT)
                 .setMaximalPrice();
         double maxFilterPrice = searchResults.getMaxFilterPrice();
         List<Double> prisesOfSortedProducts = ConvertUtils.convertWebElementPriceListToListDouble(searchResults.getListOfPriceItems());

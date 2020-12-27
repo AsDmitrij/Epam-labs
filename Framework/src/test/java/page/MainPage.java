@@ -55,6 +55,9 @@ public class MainPage extends AbstractPage{
     @FindBy(xpath = "//a[@class='homepage-auth__link-rsu ui-link ui-link_blue']")
     private WebElement configPC;
 
+    @FindBy(xpath = "//a[@href='/logout/']")
+    private WebElement logout;
+
     private static final By configPCLocator = By.xpath("//a[@class='homepage-auth__link-rsu ui-link ui-link_blue']");
 
     private static final By loginWithPasswordLocator = By.xpath("//div[@class='base-button-container base-button-container_blue']");
@@ -68,13 +71,15 @@ public class MainPage extends AbstractPage{
     private static final By mainLoginLocator = By.xpath("//button[@class='button-ui button-ui_white header__login_button']");
 
     private static final By headerUserNameLocator = By.xpath("//a[@class='header-profile__username']");
+
     public MainPage(WebDriver driver){
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
+    //@Override
     public MainPage openPage(){
-        driver.get(MAIN_PAGE_URL);
-        return  this;
+        driver.navigate().to(MAIN_PAGE_URL);
+        return this;
     }
     public MainPage login(User user){
         CustomWaits.checkClickable(mainLoginLocator,driver);
@@ -119,6 +124,12 @@ public class MainPage extends AbstractPage{
         return new ProductPage(driver);
     }
 
+    public MainPage logout(){
+        Actions builder = new Actions(driver);
+        builder.clickAndHold(headerWithLoginOfUser).click(headerWithLoginOfUser).build().perform();
+        logout.click();
+        return this;
+    }
 
 
 }

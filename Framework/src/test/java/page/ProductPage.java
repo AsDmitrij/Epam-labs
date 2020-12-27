@@ -26,10 +26,23 @@ public class ProductPage extends AbstractPage{
     @FindBy(xpath = "//span[@class='ui-checkbox__box']")
     private WebElement compareCheckBox;
 
-    private static By viewCartLocator = By.xpath("//button[@class='button-ui button-ui_brand buy-btn btn-cart button-ui_buy-card button-ui_passive']");
-    private static By viewPriceLocator= By.xpath("//span[@class='product-card-price__current product-card-price__current_active']");
-    private static By goToCartLocator= By.xpath("//a[@class='cart-modal__button button-ui button-ui_brand']");
-    private static By compareCheckBoxLocator= By.xpath("//span[@class='ui-checkbox__box']");
+    @FindBy(xpath = "//span=[@class='wishlist-button-placeholder wishlist-button-placeholder_icon']")
+    private WebElement favoritesCheckBox;
+
+    @FindBy(xpath = "//i[@class='wishlist__icon-add']")
+    private WebElement favoritesCheckBoxClick;
+
+    @FindBy(xpath = "//h1[@class='page-title price-item-title']")
+    private WebElement nameOfItem;
+
+    @FindBy(xpath = "//span[@class='wishlist-link__lbl']")
+    private WebElement toFavorites;
+
+    private final static By addedToFavoritesLocator = By.xpath("//i[@class='wishlist__icon-add wishlist__icon-add_added']");
+    private final static By viewCartLocator = By.xpath("//button[@class='button-ui button-ui_brand buy-btn btn-cart button-ui_buy-card button-ui_passive']");
+    private final static By viewPriceLocator= By.xpath("//span[@class='product-card-price__current product-card-price__current_active']");
+    private final static By goToCartLocator= By.xpath("//a[@class='cart-modal__button button-ui button-ui_brand']");
+    private final static By compareCheckBoxLocator= By.xpath("//span[@class='ui-checkbox__box']");
 
 
     public ProductPage(WebDriver driver){
@@ -52,12 +65,31 @@ public class ProductPage extends AbstractPage{
         double priceOfAddedProduct = Double.parseDouble(priceOfAddedProductInString.replaceAll("[^0-9]", ""));
         return priceOfAddedProduct;
     }
+    public String getNameOfProduct(){
+        CustomWaits.checkPresence(viewPriceLocator,driver);
+        return nameOfItem.getText();
+    }
     public ProductPage putProductToCart(){
         CustomWaits.checkPresence(viewCartLocator,driver);
         Actions actions = new Actions(driver);
         actions.moveToElement(addToCartPassive).build().perform();
         addToCartActive.click();
         return this;
+    }
+    public ProductPage addToFavorites(){
+        CustomWaits.checkClickable(viewCartLocator,driver);
+        if(driver.findElements(addedToFavoritesLocator).size()==0) {
+            favoritesCheckBoxClick.click();
+        }
+        return this;
+    }
+    public String getFavoritesStatusText(){
+
+        return favoritesCheckBox.getText();
+    }
+    public FavoritesPage goToFavorites(){
+        toFavorites.click();
+        return new FavoritesPage(driver);
     }
     public CartPage goToCart() {
         CustomWaits.checkPresence(goToCartLocator,driver);
@@ -68,7 +100,4 @@ public class ProductPage extends AbstractPage{
     public CartPage checkValuesInCart(){
         return new CartPage(driver);
     }
-
-
-
 }

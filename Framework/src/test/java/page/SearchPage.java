@@ -12,6 +12,7 @@ import java.util.List;
 
 public class SearchPage extends AbstractPage{
 
+    private static final String SEARCH_PAGE_URL = "https://www.dns-shop.ru/search/";
     @FindBy(xpath = "//div[@class='product-info__title-link' and 1]")
     private List<WebElement> findProductList;
 
@@ -36,8 +37,10 @@ public class SearchPage extends AbstractPage{
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
+    @Override
     protected SearchPage openPage() {
-        return null;
+        driver.navigate().to(SEARCH_PAGE_URL);
+        return this;
     }
     public List<WebElement> getListOfFindProducts(){
         List<WebElement> selectProductForBuy = findProductList;

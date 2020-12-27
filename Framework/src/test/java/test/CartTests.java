@@ -1,6 +1,7 @@
 package test;
 
 
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import page.CartPage;
 import page.MainPage;
@@ -10,10 +11,9 @@ import util.ConvertUtils;
 import util.SearchUtils;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import java.util.List;
+import static org.testng.Assert.*;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import java.util.List;
 
 
 public class CartTests extends CommonConditions{
@@ -53,5 +53,16 @@ public class CartTests extends CommonConditions{
                 .deleteAllItems()
                 .isCartEmpty();
         assertTrue(isCartEmpty);
+    }
+    @Test
+    public void addToFavorites(){
+        ProductPage productPage = new MainPage(driver)
+                .openPage()
+                .goToProductPage()
+                .openPage()
+                .addToFavorites();
+        String nameOfCurrentProduct = productPage.getNameOfProduct();
+        String nameOfItemInFavorites = productPage.goToFavorites().getNameOfAddedToFavoritesItem();
+        Assert.assertTrue(nameOfCurrentProduct.contains(nameOfItemInFavorites));
     }
 }
