@@ -54,7 +54,7 @@ public class CartTests extends CommonConditions{
                 .isCartEmpty();
         assertTrue(isCartEmpty);
     }
-    @Test
+    @Test(priority = 4)
     public void addToFavorites(){
         ProductPage productPage = new MainPage(driver)
                 .openPage()

@@ -38,6 +38,7 @@ public class ProductPage extends AbstractPage{
     @FindBy(xpath = "//span[@class='wishlist-link__lbl']")
     private WebElement toFavorites;
 
+    private final static By checkboxLocator = By.xpath("//span[@class='ui-checkbox__box']");
     private final static By addedToFavoritesLocator = By.xpath("//i[@class='wishlist__icon-add wishlist__icon-add_added']");
     private final static By viewCartLocator = By.xpath("//button[@class='button-ui button-ui_brand buy-btn btn-cart button-ui_buy-card button-ui_passive']");
     private final static By viewPriceLocator= By.xpath("//span[@class='product-card-price__current product-card-price__current_active']");
@@ -77,7 +78,7 @@ public class ProductPage extends AbstractPage{
         return this;
     }
     public ProductPage addToFavorites(){
-        CustomWaits.checkClickable(viewCartLocator,driver);
+        CustomWaits.checkClickable(checkboxLocator,driver);
         if(driver.findElements(addedToFavoritesLocator).size()==0) {
             favoritesCheckBoxClick.click();
         }
