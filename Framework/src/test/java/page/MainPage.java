@@ -76,7 +76,7 @@ public class MainPage extends AbstractPage{
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
-    //@Override
+
     public MainPage openPage(){
         driver.navigate().to(MAIN_PAGE_URL);
         return this;

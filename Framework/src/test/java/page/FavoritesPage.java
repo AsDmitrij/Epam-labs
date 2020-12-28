@@ -1,5 +1,7 @@
 package page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class FavoritesPage extends AbstractPage{
     private static final String FAVORITES_PAGE_URL = "https://www.dns-shop.ru/profile/wishlist";
+    private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath = "//div[@class='name']")
     private List<WebElement> listOfAddedItems;
@@ -24,6 +27,7 @@ public class FavoritesPage extends AbstractPage{
 
     public FavoritesPage openPage(){
         driver.navigate().to(FAVORITES_PAGE_URL);
+        logger.info("Page with favorite items opened");
         return this;
     }
     public String getNameOfAddedToFavoritesItem(){

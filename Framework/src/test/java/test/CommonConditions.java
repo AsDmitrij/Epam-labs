@@ -19,7 +19,7 @@ public class CommonConditions {
     public void setBrowserOptions()
     {
         driver = DriverSingleton.getDriver();
-        User testUser = UserCreator.withCredentialsFromProperty();
+
     }
     @BeforeMethod
     public void loginUser(){
@@ -29,8 +29,8 @@ public class CommonConditions {
                 .login(testUser);
 
     }
-   // @AfterMethod
-    public void logoutUser(){
+    @AfterMethod
+    public void logout(){
         MainPage mainPage = new MainPage(driver).logout();
     }
     @AfterTest(alwaysRun = true)

@@ -56,7 +56,6 @@ public class CartPage extends AbstractPage{
     }
     protected CartPage openPage() {
         driver.navigate().to(CART_URL);
-        logger.info("Cart page opened");
         CustomWaits.waitForPageLoaded(driver);
         return this;
     }
@@ -90,6 +89,7 @@ public class CartPage extends AbstractPage{
     public CartPage deleteAllItems(){
         if(driver.findElements(selectAllItemsLocator).size() > 0){
             selectAllItemsInCart().deleteSelectedItemsInCart();
+            logger.info("There was more than one item in cart");
         }
         else{
             CustomWaits.checkClickable(deleteItemLocator,driver);
