@@ -46,7 +46,7 @@ public class ResultConfigPage extends AbstractPage {
         CustomWaits.checkClickable(nameOfItemLocator,driver);
         listOfConfigureItems =  driver.findElements(By.xpath(xPathOfItemName));
         List<String> listWithNameOfItems = new ArrayList<>();
-        listWithNameOfItems = ConvertUtils.convertWebElementPriceListToListString(listOfConfigureItems);
+        listWithNameOfItems = ConvertUtils.convertWebElementToListString(listOfConfigureItems);
         return listWithNameOfItems;
     }
     public ResultConfigPage logout(){

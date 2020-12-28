@@ -13,6 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,7 +42,7 @@ public class CartTests extends CommonConditions{
                 .goToCart();
         String productName = cartPage.getNameOfProductInCart();
         List<WebElement> listOfOfferedAccessories = cartPage.getListOfOfferedAccessories();
-        List<String> listOfNamesOfOfferedAccessories = ConvertUtils.convertWebElementPriceListToListString(listOfOfferedAccessories);
+        List<String> listOfNamesOfOfferedAccessories = ConvertUtils.convertWebElementToListString(listOfOfferedAccessories);
         int matchPercent = SearchUtils.getMatchPercentage(productName,listOfNamesOfOfferedAccessories);
         assertThat(EXPECTED_MATCH_PERCENT, lessThan(matchPercent));
     }
@@ -55,7 +56,7 @@ public class CartTests extends CommonConditions{
         assertTrue(isCartEmpty);
     }
     @Test(priority = 4)
-    public void addToFavorites(){
+    public void testAddToFavorites() {
         ProductPage productPage = new MainPage(driver)
                 .openPage()
                 .goToProductPage()
@@ -64,5 +65,17 @@ public class CartTests extends CommonConditions{
         String nameOfCurrentProduct = productPage.getNameOfProduct();
         String nameOfItemInFavorites = productPage.goToFavorites().getNameOfAddedToFavoritesItem();
         Assert.assertTrue(nameOfCurrentProduct.contains(nameOfItemInFavorites));
+    }
+    @Test(priority = 5)
+    public void testAddToCompare(){
+        ProductPage productPage = new MainPage(driver)
+                .openPage()
+                .goToProductPage()
+                .openPage();
+        List<String> listOfAddedProductNames = new ArrayList<String>();
+        listOfAddedProductNames.add(productPage.addProductToCompare().getNameOfProduct());
+        listOfAddedProductNames.add(productPage.openSecondPage().addProductToCompare().getNameOfProduct());
+        List<String> listOfNameProductsInMatch= productPage.goToMatch().getNameListOfMatchingProducts();
+        assertEquals(listOfAddedProductNames,listOfNameProductsInMatch);
     }
 }

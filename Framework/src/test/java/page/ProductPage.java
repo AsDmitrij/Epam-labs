@@ -9,7 +9,7 @@ import wait.CustomWaits;
 public class ProductPage extends AbstractPage{
 
     private static final String PRODUCT_PAGE_URL = "https://www.dns-shop.ru/product/5fbc44bb7b2a3332/64-smartfon-samsung-galaxy-m21-64-gb-cernyj/";
-    private static final String SPRODUCT_PAGE_URL = "https://www.dns-shop.ru/product/01806bf519863332/63-smartfon-xiaomi-redmi-note-8-128-gb-belyj/";
+    private static final String SECOND_PRODUCT_PAGE_URL = "https://www.dns-shop.ru/product/01806bf519863332/63-smartfon-xiaomi-redmi-note-8-128-gb-belyj/";
 
     @FindBy(xpath = "//span[@class='product-card-price__current product-card-price__current_active']")
     private WebElement priceOfChosenProduct;
@@ -38,6 +38,10 @@ public class ProductPage extends AbstractPage{
     @FindBy(xpath = "//span[@class='wishlist-link__lbl']")
     private WebElement toFavorites;
 
+    @FindBy(xpath = "//span[@class ='compare-link__lbl']")
+    private WebElement toMatch;
+
+    private final static By toMatchLocator = By.xpath("//span[@class ='compare-link__lbl']");
     private final static By checkboxLocator = By.xpath("//span[@class='ui-checkbox__box']");
     private final static By addedToFavoritesLocator = By.xpath("//i[@class='wishlist__icon-add wishlist__icon-add_added']");
     private final static By viewCartLocator = By.xpath("//button[@class='button-ui button-ui_brand buy-btn btn-cart button-ui_buy-card button-ui_passive']");
@@ -53,6 +57,11 @@ public class ProductPage extends AbstractPage{
 
     public ProductPage openPage(){
         driver.navigate().to(PRODUCT_PAGE_URL);
+        return this;
+    }
+    public ProductPage openSecondPage(){
+        driver.navigate().to(SECOND_PRODUCT_PAGE_URL);
+        CustomWaits.waitForPageLoaded(driver);
         return this;
     }
     public  ProductPage addProductToCompare(){
@@ -85,7 +94,6 @@ public class ProductPage extends AbstractPage{
         return this;
     }
     public String getFavoritesStatusText(){
-
         return favoritesCheckBox.getText();
     }
     public FavoritesPage goToFavorites(){
@@ -96,6 +104,11 @@ public class ProductPage extends AbstractPage{
         CustomWaits.checkPresence(goToCartLocator,driver);
         viewCart.click();
         return new CartPage(driver);
+    }
+    public MatchPage goToMatch(){
+        CustomWaits.checkClickable(toMatchLocator,driver);
+        toMatch.click();
+        return new MatchPage(driver);
     }
 
     public CartPage checkValuesInCart(){

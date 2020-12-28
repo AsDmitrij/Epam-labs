@@ -43,7 +43,7 @@ public class ConvertUtils {
         }
         return values;
     }
-    public static List<String> convertWebElementPriceListToListString(List<WebElement> webElementsList) {
+    public static List<String> convertWebElementToListString(List<WebElement> webElementsList) {
         List<String> values = new ArrayList<>();
         for(WebElement e : webElementsList){
             values.add(e.getText());
