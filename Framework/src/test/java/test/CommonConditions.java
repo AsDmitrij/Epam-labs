@@ -2,6 +2,7 @@ package test;
 
 import driver.DriverSingleton;
 import model.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import page.MainPage;
@@ -15,25 +16,26 @@ public class CommonConditions {
     protected WebDriver driver;
     public static final int EXPECTED_MATCH_PERCENT = 20;
     public static final String NAME_OF_FIND_PRODUCT = "Samsung";
-    @BeforeTest(alwaysRun = true)
+   // @BeforeClass(alwaysRun = true)
     public void setBrowserOptions()
     {
         driver = DriverSingleton.getDriver();
-
     }
     @BeforeMethod
     public void loginUser(){
+        driver = DriverSingleton.getDriver();
         User testUser = UserCreator.withCredentialsFromProperty();
-        MainPage mainPage = new MainPage(driver).
+        new MainPage(driver).
                 openPage()
                 .login(testUser);
-
     }
     @AfterMethod
     public void logout(){
-        MainPage mainPage = new MainPage(driver).logout();
+        new MainPage(driver)
+                .logout();
+        DriverSingleton.closeDriver();
     }
-    @AfterTest(alwaysRun = true)
+  //  @AfterClass(alwaysRun = true)
     public void closeBrowser(){
         DriverSingleton.closeDriver();
     }

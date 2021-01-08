@@ -1,5 +1,6 @@
 package test;
 
+import org.junit.Assert;
 import org.testng.annotations.Test;
 import page.MainPage;
 import page.PCConfigPage;
@@ -10,6 +11,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class ConfigPCTests extends CommonConditions{
@@ -39,15 +41,13 @@ public class ConfigPCTests extends CommonConditions{
         List<String> listOfSavedItemsConfigurationByPublicLink = new ResultConfigPage(driver)
                 .openPage(configurationLink)
                 .getListWithNameOfItems();
-        assertTrue(listOfSavedItemsConfiguration.equals(listOfSavedItemsConfigurationByPublicLink));
+        Assert.assertEquals(listOfSavedItemsConfiguration,listOfSavedItemsConfigurationByPublicLink);
     }
     @Test(priority = 3)
     public void testDeletingAllPCConfig(){
         boolean isEmptyConfigList = new MainPage(driver)
                 .openPage()
-                .goToAccountPage()
-                .goToUserConfigPage()
-                .openPage()
+                .goToUserConfigPC()
                 .selectAllConfig()
                 .deleteSelectedConfig()
                 .isCurrentLengthUserConfigListEmpty();;

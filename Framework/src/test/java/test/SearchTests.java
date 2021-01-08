@@ -23,7 +23,7 @@ public class SearchTests  extends CommonConditions{
         assertThat(searchResults).extracting(WebElement::getText).allMatch(text -> text.contains(NAME_OF_FIND_PRODUCT));
     }
     @Test
-    public void testSortingSearch(){
+    public void testSortingSearch() throws InterruptedException {
         SearchPage searchResults = new MainPage(driver)
                 .openPage()
                 .search(NAME_OF_FIND_PRODUCT)

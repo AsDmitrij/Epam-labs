@@ -10,7 +10,7 @@ import wait.CustomWaits;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PCConfigPage extends AbstractPage{
+public class PCConfigPage extends AbstractPage {
     private static final String MAIN_PAGE_URL = "https://www.dns-shop.ru/configurator/";
 
 
@@ -32,47 +32,42 @@ public class PCConfigPage extends AbstractPage{
     @FindBy(xpath = "//button[@class='btn btn-default btn-add']")
     private List<WebElement> addAccessories;
 
-    @FindBy(xpath = "//span[text()='Свернуть']")
-    private List<WebElement> collapseCategory;
+    private static final By endConfigurationLocator = By.xpath("//*[@id='modal-for-save-configuration']/div/div/div[2]/div/a");
 
-    @FindBy(xpath = "//div[@class='category-groups']")
-    private List<WebElement> categoryGroup;
+    private static final String xPathOfAddButton = "//button[@class='btn btn-default btn-add']";
 
+    private static final String xPathOfFindContainer = "/div[@class='configurator-catalog expanded' and 2]/div[@class='catalog-category-container' and 2]/div[@class='category-groups' and 4]";
 
-
-    private static By headerOfAccessoriesLocator = By.xpath("//div[@class='category-header']");
-    private static By endConfigurationLocator = By.xpath("//*[@id='modal-for-save-configuration']/div/div/div[2]/div/a");
-    private static String xPathOfAddButton = "//button[@class='btn btn-default btn-add']";
-
-    private static String xPathOfFindContainer = "/div[@class='configurator-catalog expanded' and 2]/div[@class='catalog-category-container' and 2]/div[@class='category-groups' and 4]";
-
-    public PCConfigPage(WebDriver driver){
+    public PCConfigPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
-    public PCConfigPage openPage(){
+
+    public PCConfigPage openPage() {
         driver.get(MAIN_PAGE_URL);
-        return  this;
+        return this;
     }
-    public List<String> getConfigureOfPC(){
+
+    public List<String> getConfigureOfPC() {
         closeInstruction.click();
         List<String> namesOfAddedItems = new ArrayList<String>();
-        for(int i=0;i<EXPECTED_NUMBER_OF_CONFIGURE;i++){
-            addAccessories =  driver.findElements(By.xpath(xPathOfAddButton));
+        for (int i = 0; i < EXPECTED_NUMBER_OF_CONFIGURE; i++) {
+            addAccessories = driver.findElements(By.xpath(xPathOfAddButton));
             addAccessories.get(0).click();
-            By findContainerLocator = By.xpath("//div["+(i+1)+"]"+xPathOfFindContainer);
-            CustomWaits.checkPresenceForConfigurator(findContainerLocator,driver);
-            addAccessories =  driver.findElements(By.xpath(xPathOfAddButton));
+            By findContainerLocator = By.xpath("//div[" + (i + 1) + "]" + xPathOfFindContainer);
+            CustomWaits.checkPresenceForConfigurator(findContainerLocator, driver);
+            addAccessories = driver.findElements(By.xpath(xPathOfAddButton));
             namesOfAddedItems.add(nameOfAddingItem.getText());
             addAccessories.get(0).click();
-            CustomWaits.checkText(itemsCount,String.valueOf(i+1),driver);
+            CustomWaits.checkText(itemsCount, String.valueOf(i + 1), driver);
         }
 
-        return  namesOfAddedItems;
+        return namesOfAddedItems;
     }
-    public ResultConfigPage endConfiguration(){
+
+    public ResultConfigPage endConfiguration() {
         saveConfiguration.click();
-        CustomWaits.checkClickable(endConfigurationLocator,driver);
+        CustomWaits.checkClickable(endConfigurationLocator, driver);
         endConfiguration.click();
         return new ResultConfigPage(driver);
     }

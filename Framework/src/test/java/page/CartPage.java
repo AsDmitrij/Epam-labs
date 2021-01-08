@@ -11,16 +11,13 @@ import wait.CustomWaits;
 
 import java.util.List;
 
-public class CartPage extends AbstractPage{
+public class CartPage extends AbstractPage {
 
     private final String CART_URL = "https://www.dns-shop.ru/order/begin/";
     private final Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath = "//span[@class='price__current']")
     private List<WebElement> productPriceInCart;
-
-    @FindBy(xpath = "//button[@class='menu-control-button']")
-    private WebElement refreshCart;
 
     @FindBy(xpath = "//a[@class='accessories__item-title' and 1]")
     private List<WebElement> offeredAccessories;
@@ -40,62 +37,66 @@ public class CartPage extends AbstractPage{
     @FindBy(xpath = "//div[@class='cart-items__product']")
     private List<WebElement> productCarts;
 
-    private static By deleteItemLocator= By.xpath("//button[@class='menu-control-button']");
-    private static By productCartsLocator= By.xpath("//div[@class='cart-items__product']");
-    private static By selectAllItemsLocator= By.xpath("//span[@class='select-all-checkbox__icon']");
-    private static By deleteSelectItemsLocator= By.xpath("//div[@class='mass-selection__delete-btn']");
-    private static By viewProductInCartLocator= By.xpath("//div[@class='cart-items__product-name']");
-    private static By viewPriceLocator= By.xpath("//span[@class='price__current']");//span[@class='price__current']//span[@class='common-products-list-description__price']
-    private static By refreshCartLocator= By.xpath("//div[1]/div[@class='price__block price__block_main' and 1]/span[@class='price__current' and 2]");
+    private static By deleteItemLocator = By.xpath("//button[@class='menu-control-button']");
+    private static By productCartsLocator = By.xpath("//div[@class='cart-items__product']");
+    private static By selectAllItemsLocator = By.xpath("//span[@class='select-all-checkbox__icon']");
+    private static By deleteSelectItemsLocator = By.xpath("//div[@class='mass-selection__delete-btn']");
+    private static By viewProductInCartLocator = By.xpath("//div[@class='cart-items__product-name']");
+    private static By viewPriceLocator = By.xpath("//span[@class='price__current']");
 
 
-
-    public CartPage(WebDriver driver){
+    public CartPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
+
     protected CartPage openPage() {
         driver.navigate().to(CART_URL);
         CustomWaits.waitForPageLoaded(driver);
         return this;
     }
-    public double getPriceOfProductInCart(){
-        CustomWaits.checkPresence(viewPriceLocator,driver);
+
+    public double getPriceOfProductInCart() {
+        CustomWaits.checkPresence(viewPriceLocator, driver);
         String priceOfProductInCartInString = productPriceInCart.get(0).getText();
         double priceOfProductInCart = Double.parseDouble(priceOfProductInCartInString.replaceAll("[^0-9]", ""));
         return priceOfProductInCart;
     }
-    public String getNameOfProductInCart(){
-        CustomWaits.checkPresence(viewProductInCartLocator,driver);
+
+    public String getNameOfProductInCart() {
+        CustomWaits.checkPresence(viewProductInCartLocator, driver);
         String productName = nameOfProductInCart.getText();
         return productName;
     }
-    public List<WebElement> getListOfOfferedAccessories(){
+
+    public List<WebElement> getListOfOfferedAccessories() {
         List<WebElement> listOfOfferedAccessories = offeredAccessories;
         return listOfOfferedAccessories;
     }
-    public CartPage selectAllItemsInCart(){
-        CustomWaits.checkClickable(selectAllItemsLocator,driver);
+
+    public CartPage selectAllItemsInCart() {
+        CustomWaits.checkClickable(selectAllItemsLocator, driver);
         selectAllItems.click();
         return this;
     }
-    public CartPage deleteSelectedItemsInCart(){
+
+    public CartPage deleteSelectedItemsInCart() {
 
 
-        CustomWaits.checkClickable(deleteSelectItemsLocator,driver);
+        CustomWaits.checkClickable(deleteSelectItemsLocator, driver);
         deleteSelectItems.click();
         return this;
     }
-    public CartPage deleteAllItems(){
-        if(driver.findElements(selectAllItemsLocator).size() > 0){
+
+    public CartPage deleteAllItems() {
+        if (driver.findElements(selectAllItemsLocator).size() > 0) {
             selectAllItemsInCart().deleteSelectedItemsInCart();
             logger.info("There was more than one item in cart");
-        }
-        else{
-            CustomWaits.checkClickable(deleteItemLocator,driver);
-            while(deleteItem.size()>0){
+        } else {
+            CustomWaits.checkClickable(deleteItemLocator, driver);
+            while (deleteItem.size() > 0) {
                 deleteItem = driver.findElements(deleteItemLocator);
-                if(driver.findElements(deleteItemLocator).size() > 0){
+                if (driver.findElements(deleteItemLocator).size() > 0) {
                     deleteItem.get(1).click();
                 }
                 deleteItem = driver.findElements(deleteItemLocator);
@@ -103,7 +104,8 @@ public class CartPage extends AbstractPage{
         }
         return this;
     }
-    public boolean isCartEmpty(){
+
+    public boolean isCartEmpty() {
         driver.navigate().refresh();
         productCarts = driver.findElements(productCartsLocator);
         return productCarts.isEmpty();

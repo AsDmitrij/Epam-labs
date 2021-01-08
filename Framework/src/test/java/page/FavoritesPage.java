@@ -12,6 +12,7 @@ import wait.CustomWaits;
 import java.util.List;
 
 public class FavoritesPage extends AbstractPage{
+
     private static final String FAVORITES_PAGE_URL = "https://www.dns-shop.ru/profile/wishlist";
     private final Logger logger = LogManager.getRootLogger();
 

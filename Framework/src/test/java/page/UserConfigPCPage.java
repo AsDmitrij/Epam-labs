@@ -31,9 +31,10 @@ public class UserConfigPCPage extends AbstractPage{
     @FindBy(xpath = "//a[@data-role='select-all']")
     private WebElement selectAllConfigurations;
 
-    private static By configurationCardLocator = By.xpath("//div[@class='dns-row rsu-user-configuration']");
-    private static By actionMenuOfConfigurationSelectAllLocator = By.xpath("//a[@data-role='select-all']");
-    private static By actionMenuOfConfigurationLocator = By.xpath("//div[@class='container userpage']");
+    private static final By configurationCardLocator = By.xpath("//div[@class='dns-row rsu-user-configuration']");
+    private static final By actionMenuOfConfigurationSelectAllLocator = By.xpath("//a[@data-role='select-all']");
+    private static final By actionMenuOfConfigurationLocator = By.xpath("//div[@class='container userpage']");
+    private static final By deleteOfConfigurationLocator = By.xpath("//a[@class='pseudo-link']");
 
     public UserConfigPCPage(WebDriver driver){
         super(driver);
@@ -41,7 +42,7 @@ public class UserConfigPCPage extends AbstractPage{
     }
     public UserConfigPCPage openPage(){
         driver.get(USER_CONFIG_PC_PAGE_URL);
-        return  this;
+        return this;
     }
     public String copyConfigurationLink() throws IOException, UnsupportedFlavorException {
         CustomWaits.checkPresence(actionMenuOfConfigurationLocator,driver);
@@ -54,17 +55,25 @@ public class UserConfigPCPage extends AbstractPage{
         return new ResultConfigPage(driver);
     }
     public UserConfigPCPage selectAllConfig(){
-        CustomWaits.checkPresence(actionMenuOfConfigurationSelectAllLocator,driver);
+        CustomWaits.checkClickable(actionMenuOfConfigurationSelectAllLocator,driver);
         selectAllConfigurations.click();
         return this;
     }
     public UserConfigPCPage deleteSelectedConfig(){
-        if(listOfUserConfigurations.size()>0)
-        actionMenuOfConfiguration.get(2).click();
+        CustomWaits.waitUntilAttributeNotPresent(actionMenuOfConfiguration,2,driver);
+        if(listOfUserConfigurations.size()>0){
+            CustomWaits.waitUntilAttributeNotPresent(actionMenuOfConfiguration,2,driver);
+            CustomWaits.checkClickable(deleteOfConfigurationLocator,driver);
+            actionMenuOfConfiguration.get(2).click();
+        }
         return this;
     }
     public boolean isCurrentLengthUserConfigListEmpty(){
-        driver.navigate().refresh();
+
+        if(actionMenuOfConfiguration.get(2).getAttribute("disabled")==null){
+            driver.navigate().refresh();
+        }
+        CustomWaits.waitForPageLoaded(driver);
         listOfUserConfigurations = driver.findElements(configurationCardLocator);
         return listOfUserConfigurations.isEmpty();
     }

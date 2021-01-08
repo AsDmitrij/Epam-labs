@@ -17,12 +17,13 @@ public class AccountPage {
 
     private static By subMenuItemsLocator = By.xpath("//a[@class='addition-menu__link' and 1]");
 
-    public AccountPage(WebDriver driver){
+    public AccountPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
-    public UserConfigPCPage goToUserConfigPage(){
-        CustomWaits.checkClickable(subMenuItemsLocator,driver);
+
+    public UserConfigPCPage goToUserConfigPage() {
+        CustomWaits.checkClickable(subMenuItemsLocator, driver);
         subMenuItems.get(0).click();
         return new UserConfigPCPage(driver);
     }

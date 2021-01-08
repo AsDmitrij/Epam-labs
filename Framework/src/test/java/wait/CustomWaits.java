@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class CustomWaits {
 
     private static final int WAIT_TIMEOUT_SECONDS = 10;
@@ -48,4 +50,8 @@ public class CustomWaits {
     public static boolean checkText(WebElement element,String waitText, WebDriver driver) {
         return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.textToBePresentInElement(element,waitText));
     }
+    public static boolean waitUntilAttributeNotPresent(List<WebElement> elements, Integer indexOfElement, WebDriver driver) {
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.attributeToBeNotEmpty(elements.get(indexOfElement),"disabled")));
+    }
+
 }

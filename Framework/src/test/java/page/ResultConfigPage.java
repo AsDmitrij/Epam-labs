@@ -15,7 +15,6 @@ import java.util.List;
 public class ResultConfigPage extends AbstractPage {
 
     private static final String CONFIGURATION_PAGE_URL = "https://www.dns-shop.ru/configurator/";
-
     private static String xPathOfItemName = "//div[@class='product-name']/a[1]";
 
     @FindBy(xpath = "//div[@class='header__login']")
@@ -29,27 +28,29 @@ public class ResultConfigPage extends AbstractPage {
 
     private static By nameOfItemLocator = By.xpath("//div[@class='product-name']/a[1]");
 
-    public ResultConfigPage openPage(){
+    public ResultConfigPage openPage() {
         driver.navigate().to(CONFIGURATION_PAGE_URL);
         return this;
     }
 
-    public ResultConfigPage(WebDriver driver){
+    public ResultConfigPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver, this);
     }
-    public ResultConfigPage openPage(String pageURL){
+
+    public ResultConfigPage openPage(String pageURL) {
         driver.get(pageURL);
-        return  this;
+        return this;
     }
-    public List<String> getListWithNameOfItems(){
-        CustomWaits.checkClickable(nameOfItemLocator,driver);
-        listOfConfigureItems =  driver.findElements(By.xpath(xPathOfItemName));
-        List<String> listWithNameOfItems = new ArrayList<>();
-        listWithNameOfItems = ConvertUtils.convertWebElementToListString(listOfConfigureItems);
+
+    public List<String> getListWithNameOfItems() {
+        CustomWaits.checkClickable(nameOfItemLocator, driver);
+        listOfConfigureItems = driver.findElements(By.xpath(xPathOfItemName));
+        List<String> listWithNameOfItems = ConvertUtils.convertWebElementToListString(listOfConfigureItems);
         return listWithNameOfItems;
     }
-    public ResultConfigPage logout(){
+
+    public ResultConfigPage logout() {
         Actions builder = new Actions(driver);
         builder.clickAndHold(headerWithLoginOfUser).click(headerWithLoginOfUser).build().perform();
         logout.click();
