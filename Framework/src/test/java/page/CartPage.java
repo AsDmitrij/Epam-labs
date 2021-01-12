@@ -81,8 +81,6 @@ public class CartPage extends AbstractPage {
     }
 
     public CartPage deleteSelectedItemsInCart() {
-
-
         CustomWaits.checkClickable(deleteSelectItemsLocator, driver);
         deleteSelectItems.click();
         return this;

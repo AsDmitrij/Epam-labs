@@ -76,8 +76,7 @@ public class ProductPage extends AbstractPage {
     public double getPriceOfProduct() {
         CustomWaits.checkPresence(viewPriceLocator, driver);
         String priceOfAddedProductInString = priceOfChosenProduct.getText();
-        double priceOfAddedProduct = Double.parseDouble(priceOfAddedProductInString.replaceAll("[^0-9]", ""));
-        return priceOfAddedProduct;
+        return Double.parseDouble(priceOfAddedProductInString.replaceAll("[^0-9]", ""));
     }
 
     public String getNameOfProduct() {
@@ -120,9 +119,5 @@ public class ProductPage extends AbstractPage {
         CustomWaits.checkClickable(toMatchLocator, driver);
         toMatch.click();
         return new MatchPage(driver);
-    }
-
-    public CartPage checkValuesInCart() {
-        return new CartPage(driver);
     }
 }

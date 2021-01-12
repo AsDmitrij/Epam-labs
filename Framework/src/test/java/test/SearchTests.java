@@ -23,13 +23,13 @@ public class SearchTests  extends CommonConditions{
         assertThat(searchResults).extracting(WebElement::getText).allMatch(text -> text.contains(NAME_OF_FIND_PRODUCT));
     }
     @Test
-    public void testSortingSearch() throws InterruptedException {
+    public void testSortingSearch() {
         SearchPage searchResults = new MainPage(driver)
                 .openPage()
                 .search(NAME_OF_FIND_PRODUCT)
-                .setMaximalPrice();
-        double maxFilterPrice = searchResults.getMaxFilterPrice();
+                .setMaximalPrice(MAX_PRICE_OF_FIND_PRODUCT)
+                .applyFilter();
         List<Double> prisesOfSortedProducts = ConvertUtils.convertWebElementPriceListToListDouble(searchResults.getListOfPriceItems());
-        Assert.assertTrue(maxFilterPrice <= Collections.max(prisesOfSortedProducts));
+        Assert.assertTrue(MAX_PRICE_OF_FIND_PRODUCT <= Collections.max(prisesOfSortedProducts));
     }
 }

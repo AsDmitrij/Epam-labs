@@ -32,26 +32,29 @@ public class CustomWaits {
     }
 
     public static ExpectedCondition<Boolean> waitForLoad(){
-        return driver -> ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+        return driver -> {
+            assert driver != null;
+            return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+        };
     }
 
-    public static WebElement checkPresence(By element, WebDriver driver) {
-        return new WebDriverWait(driver,WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(element));
+    public static void checkPresence(By element, WebDriver driver) {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
-    public static WebElement checkPresenceForConfigurator(By element, WebDriver driver) {
-        return new WebDriverWait(driver,2*WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(element));
+    public static void checkPresenceForConfigurator(By element, WebDriver driver) {
+        new WebDriverWait(driver, 2 * WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
-    public static WebElement checkClickable(By element, WebDriver driver) {
-        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(element));
+    public static void checkClickable(By element, WebDriver driver) {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public static boolean checkText(WebElement element,String waitText, WebDriver driver) {
-        return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.textToBePresentInElement(element,waitText));
+    public static void checkText(WebElement element, String waitText, WebDriver driver) {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS).until(ExpectedConditions.textToBePresentInElement(element, waitText));
     }
-    public static boolean waitUntilAttributeNotPresent(List<WebElement> elements, Integer indexOfElement, WebDriver driver) {
-        return new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.attributeToBeNotEmpty(elements.get(indexOfElement),"disabled")));
+    public static void waitUntilAttributeNotPresent(List<WebElement> elements, Integer indexOfElement, WebDriver driver) {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.attributeToBeNotEmpty(elements.get(indexOfElement), "disabled")));
     }
 
 }
