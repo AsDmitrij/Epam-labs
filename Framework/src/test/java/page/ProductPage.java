@@ -4,6 +4,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import service.ConfigPCCreator;
+import test.ConfigPCTests;
 import wait.CustomWaits;
 
 public class ProductPage extends AbstractPage {
@@ -41,6 +43,11 @@ public class ProductPage extends AbstractPage {
     @FindBy(xpath = "//span[@class ='compare-link__lbl']")
     private WebElement toMatch;
 
+    @FindBy(xpath = "//a[@class='add-item-to-configuration-link']")
+    private WebElement addProductToConfigurator;
+
+    private final static By nameOfItemLocator = By.xpath("//h1[@class='page-title price-item-title']");
+    private final static By toConfiguratorLocator = By.xpath("//a[@class='add-item-to-configuration-link']");
     private final static By toMatchLocator = By.xpath("//span[@class ='compare-link__lbl']");
     private final static By checkboxLocator = By.xpath("//span[@class='ui-checkbox__box']");
     private final static By addedToFavoritesLocator = By.xpath("//i[@class='wishlist__icon-add wishlist__icon-add_added']");
@@ -84,6 +91,12 @@ public class ProductPage extends AbstractPage {
         return nameOfItem.getText();
     }
 
+    public ProductPage putNameOfProductToList() {
+        CustomWaits.checkPresence(nameOfItemLocator, driver);
+        ConfigPCTests.nameOfPCConfigures.add(nameOfItem.getText());
+        return this;
+    }
+
     public ProductPage putProductToCart() {
         CustomWaits.checkPresence(viewCartLocator, driver);
         Actions actions = new Actions(driver);
@@ -98,6 +111,12 @@ public class ProductPage extends AbstractPage {
             favoritesCheckBoxClick.click();
         }
         return this;
+    }
+
+    public PCConfigPage addProductToConfigurator() {
+        CustomWaits.checkClickable(toConfiguratorLocator, driver);
+        addProductToConfigurator.click();
+        return new PCConfigPage(driver);
     }
 
     public String getFavoritesStatusText() {

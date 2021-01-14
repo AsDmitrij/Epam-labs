@@ -1,31 +1,44 @@
 package test;
 
+import model.ComputerComponents;
 import org.junit.Assert;
 import org.testng.annotations.Test;
-import page.MainPage;
-import page.PCConfigPage;
-import page.ResultConfigPage;
-import page.UserConfigPCPage;
+import page.*;
+import service.ConfigPCCreator;
 
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import static org.testng.Assert.assertTrue;
 
 public class ConfigPCTests extends CommonConditions{
+    public static final List<String>  nameOfPCConfigures = new ArrayList<>();
     @Test(priority=1)
     public void testAccordanceOfSelectedAndSavedConfiguration(){
-        PCConfigPage configPage = new MainPage(driver)
+        ComputerComponents computerComponents = ConfigPCCreator.withCredentialsFromProperty();
+        List<String> composedConfigureList = new MainPage(driver)
                 .openPage()
-                .goToConfigPC();
-        List<String> composedConfigureList = configPage
-                .getConfigureOfPC();
-        List<String> finalConfigureList = configPage
-                .endConfiguration()
+                .configSearch(computerComponents.getCpuName())
+                .putNameOfProductToList()
+                .addProductToConfigurator()
+                .configSearch(computerComponents.getMotherboardName())
+                .putNameOfProductToList()
+                .addProductToConfigurator()
+                .configSearch(computerComponents.getComputerCaseName())
+                .putNameOfProductToList()
+                .addProductToConfigurator()
+                .configSearch(computerComponents.getGpuName())
+                .putNameOfProductToList()
+                .addProductToConfigurator()
+                .configSearch(computerComponents.getRamName())
+                .putNameOfProductToList()
+                .addProductToConfigurator()
+                .saveConfiguration()
                 .getListWithNameOfItems();
-        assertTrue(composedConfigureList.equals(finalConfigureList));
+        assertTrue(nameOfPCConfigures.equals(composedConfigureList));
     }
     @Test(priority=2)
     public void testAccordanceOfSavedAndSentConfiguration() throws IOException, UnsupportedFlavorException {

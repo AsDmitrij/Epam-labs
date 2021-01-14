@@ -107,6 +107,12 @@ public class MainPage extends AbstractPage {
         return new SearchPage(driver);
     }
 
+    public ProductPage configSearch(String findProduct) {
+        searchField.get(1).sendKeys(findProduct);
+        searchButton.click();
+        return new ProductPage(driver);
+    }
+
     public String getUserWelcomeName() {
         CustomWaits.waitForPageLoaded(driver);
         Actions builder = new Actions(driver);
